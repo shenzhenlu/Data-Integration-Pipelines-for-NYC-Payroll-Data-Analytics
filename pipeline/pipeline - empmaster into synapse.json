@@ -1,0 +1,41 @@
+{
+	"name": "pipeline - empmaster into synapse",
+	"properties": {
+		"activities": [
+			{
+				"name": "Data flow - empmaster into synapse",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "load_empmaster_into_synapse",
+						"type": "DataFlowReference"
+					},
+					"staging": {
+						"linkedService": {
+							"referenceName": "ls_datalake_payroll",
+							"type": "LinkedServiceReference"
+						},
+						"folderPath": "adlsnycpayroll-shenzhen-lastintial/dirstaging"
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2023-01-03T21:56:18Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
